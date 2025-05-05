@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +28,10 @@ public class EUser {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<ERole> roles = new ArrayList<ERole>();
 
+	@ManyToOne
+	@JoinColumn(name = "idCatecory")
+	private ECategory category;
+	
 	public Long getId() {
 		return id;
 	}
@@ -60,5 +66,13 @@ public class EUser {
 	
 	public void removeRole(ERole role) {
 		this.roles.remove(role);
+	}
+	
+	public ECategory getCategory() {
+		return category;
+	}
+	
+	public void setCategory(ECategory category) {
+		this.category = category;
 	}
 }

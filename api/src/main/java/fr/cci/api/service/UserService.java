@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.cci.api.dtos.RoleDTO;
 import fr.cci.api.entities.EUser;
 import fr.cci.api.payload.requests.IsValidRequestDTO;
 import fr.cci.api.payload.requests.SaveUserDTO;
@@ -38,13 +37,10 @@ public class UserService {
 			GetUserResponseDTO dto = new GetUserResponseDTO();
 			dto.setId(entity.getId());
 			dto.setUsername(entity.getUsername());
-			
-			List<RoleDTO> roles = new ArrayList<RoleDTO>();
+			dto.setCategory(entity.getCategory().getName());
+			List<String> roles = new ArrayList<String>();
 			entity.getRoles().forEach((role) -> {
-				RoleDTO roleDTO = new RoleDTO();
-				roleDTO.setId(role.getId());
-				roleDTO.setName(role.getName());
-				roles.add(roleDTO);
+				roles.add(role.getName());
 			});
 			dto.setRoles(roles);
 			dtoUsers.add(dto);

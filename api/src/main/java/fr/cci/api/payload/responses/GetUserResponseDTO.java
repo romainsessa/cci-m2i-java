@@ -3,16 +3,14 @@ package fr.cci.api.payload.responses;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.cci.api.dtos.RoleDTO;
-
 public class GetUserResponseDTO {
 	private Long id;
 
 	private String username;
 
-	private String password;
+	private String category;
 
-	private List<RoleDTO> roles = new ArrayList<RoleDTO>();
+	private List<String> roles = new ArrayList<String>();
 
 	public Long getId() {
 		return id;
@@ -30,19 +28,19 @@ public class GetUserResponseDTO {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public List<RoleDTO> getRoles() {
+	public List<String> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<RoleDTO> roles) {
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
 }
