@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.cci.api.dtos.UserDTO;
-import fr.cci.api.entities.EUser;
-import fr.cci.api.repositories.EUserRepository;
+import fr.cci.api.payload.requests.IsValidRequestDTO;
+import fr.cci.api.payload.requests.SaveUserDTO;
+import fr.cci.api.payload.responses.GetUserResponseDTO;
 import fr.cci.api.service.UserService;
 
 @RestController
@@ -18,26 +18,24 @@ import fr.cci.api.service.UserService;
 public class UserController {
 
 	private UserService userService;
-	private EUserRepository eUserRepository;
-
-	public UserController(UserService userService, EUserRepository eUserRepository) {
+	
+	public UserController(UserService userService) {
 		this.userService = userService;
-		this.eUserRepository = eUserRepository;
 	}
 
 	@PostMapping("/valid")
-	public Boolean isValid(@RequestBody UserDTO user) {
+	public boolean isValid(@RequestBody IsValidRequestDTO user) {
 		return userService.isValid(user);
 	}
 	
 	@GetMapping
-	public List<UserDTO> get() {
+	public List<GetUserResponseDTO> get() {
 		return userService.get();
 	}
 
 	@PostMapping
-	public void save(@RequestBody EUser user) {
-		eUserRepository.save(user);
+	public void save(@RequestBody SaveUserDTO user) {
+		userService.save(user);
 	}
 
 }

@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.cci.api.dtos.RoleDTO;
-import fr.cci.api.dtos.UserDTO;
 import fr.cci.api.entities.EUser;
+import fr.cci.api.payload.requests.IsValidRequestDTO;
+import fr.cci.api.payload.requests.SaveUserDTO;
+import fr.cci.api.payload.responses.GetUserResponseDTO;
 import fr.cci.api.repositories.EUserRepository;
 
 @Service
@@ -19,12 +21,21 @@ public class UserService {
 		this.eUserRepository = eUserRepository;
 	}
 	
-	public List<UserDTO> get() {		
+	public void save(SaveUserDTO user) {
+		
+		EUser entityUser = new EUser();
+		entityUser.setUsername(user.getUsername());
+		entityUser.setPassword(user.getPassword());
+		
+		eUserRepository.save(entityUser);
+	}
+	
+	public List<GetUserResponseDTO> get() {		
 		List<EUser> entityUsers = eUserRepository.findAll();
-		List<UserDTO> dtoUsers = new ArrayList<UserDTO>();
+		List<GetUserResponseDTO> dtoUsers = new ArrayList<GetUserResponseDTO>();
 		
 		entityUsers.forEach((entity) -> {			
-			UserDTO dto = new UserDTO();
+			GetUserResponseDTO dto = new GetUserResponseDTO();
 			dto.setId(entity.getId());
 			dto.setUsername(entity.getUsername());
 			
@@ -41,7 +52,7 @@ public class UserService {
 		return dtoUsers;		
 	}
 
-	public boolean isValid(UserDTO user) {
+	public boolean isValid(IsValidRequestDTO user) {
 		return eUserRepository.findAll().stream().anyMatch(
 				(u) -> 
 					u.getUsername().equals(user.getUsername()) 
