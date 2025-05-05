@@ -1,0 +1,12 @@
+<html>
+<body>
+
+	<form th:action="@{/login}" th:object="${user}" method="post">
+		<input type="text" th:field="*{username}"/>
+		<input type="text" th:field="*{password}"/>
+		<input type="submit" value="Submit"/>	
+	</form>
+	<a th:href="@{/register}">Register</a>
+
+</body>
+</html>
