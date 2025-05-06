@@ -18,7 +18,7 @@ public class HomeController {
 	@GetMapping("/")
 	public ModelAndView home(HttpSession session) {
 		if (session.getAttribute("user") == null) {
-			return new ModelAndView("redirect:/login");
+			return new ModelAndView("redirect:/login2");
 		}
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("users", userService.get());

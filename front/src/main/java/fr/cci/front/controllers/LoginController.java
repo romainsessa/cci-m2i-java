@@ -20,19 +20,19 @@ public class LoginController {
 		this.userService = userService;
 	}
 
-	@GetMapping("/login")
+	@GetMapping("/login2")
 	public String loginDisplay(Model model) {
 		model.addAttribute("user", new User());
 		return "login";
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/login2")
 	public RedirectView loginSubmit(@ModelAttribute User user, HttpSession session) {
 		if (userService.exist(user)) {
 			session.setAttribute("user", user);
 			return new RedirectView("/");
 		} else {
-			return new RedirectView("/login");
+			return new RedirectView("/login2");
 		}
 	}
 
