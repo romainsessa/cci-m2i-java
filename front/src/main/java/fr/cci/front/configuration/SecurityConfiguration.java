@@ -21,6 +21,7 @@ public class SecurityConfiguration {
 				auth -> 
 					auth
 					.requestMatchers("/register").permitAll()
+					.requestMatchers("/admin").hasRole("ADMIN")
 					.anyRequest().authenticated()
 				)
 				.formLogin(Customizer.withDefaults())

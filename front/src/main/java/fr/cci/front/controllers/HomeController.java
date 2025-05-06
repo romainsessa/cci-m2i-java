@@ -24,5 +24,11 @@ public class HomeController {
 		mav.addObject("users", userService.get());
 		return mav;
 	}
+	
+	@GetMapping("/admin")
+	public ModelAndView admin() {
+		ModelAndView mav = new ModelAndView("admin");
+		return mav;
+	}
 
 }
