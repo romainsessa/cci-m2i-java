@@ -37,12 +37,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 				new org.springframework.security.core.userdetails.User(
 						user.get().getUsername(),
 						new BCryptPasswordEncoder().encode("password"),
-						getGrantedAuthorities());
+						getGrantedAuthorities(user.get().getRoles()));
 	}
 	
-	private List<GrantedAuthority> getGrantedAuthorities() {
+	private List<GrantedAuthority> getGrantedAuthorities(List<String> roles) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		roles.forEach(role -> {
+			authorities.add(new SimpleGrantedAuthority("ROLE_"+ role));
+		});
 		return authorities;
 	}
 

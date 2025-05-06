@@ -1,9 +1,13 @@
 package fr.cci.front.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 	
 	private String username;
 	private String password;
+	private List<String> roles = new ArrayList<String>();
 
 	public User() {
 	}
@@ -28,6 +32,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<String> getRoles() {
+		return roles;
+	}
+	
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	@Override
