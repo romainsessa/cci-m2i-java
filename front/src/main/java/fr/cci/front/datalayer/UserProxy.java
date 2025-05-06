@@ -9,47 +9,46 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import fr.cci.front.model.User;
+import fr.cci.front.model.UserModel;
 
 @Repository
 public class UserProxy {
 	
-	public List<User> getUsers() {		
-		RestTemplate restTemplate = new RestTemplate();
+	private final String baseApiUrl = "http://localhost:8080";
+	private RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<List<User>> response = 
+	public List<UserModel> getUsers() {		
+
+		ResponseEntity<List<UserModel>> response = 
 				restTemplate.exchange(
-						"http://localhost:8080/user", 
+						baseApiUrl + "/user", 
 						HttpMethod.GET, 
 						null,
-						new ParameterizedTypeReference<List<User>>() {});
+						new ParameterizedTypeReference<List<UserModel>>() {});
 		
 		return response.getBody();
 	}
 	
-	public boolean isValid(User user) {		
-		RestTemplate restTemplate = new RestTemplate();
-
-		HttpEntity<User> request = new HttpEntity<User>(user);
-		ResponseEntity<Boolean> response = 
-				restTemplate.exchange(
-						"http://localhost:8080/user/valid", 
-						HttpMethod.POST, 
-						request,
-						Boolean.class);
+	public void add(UserModel user) {
 		
-		return response.getBody();
-	}
-	
-	public void add(User user) {
-		RestTemplate restTemplate = new RestTemplate();
-		
-		HttpEntity<User> request = new HttpEntity<User>(user);
+		HttpEntity<UserModel> request = new HttpEntity<UserModel>(user);
 		restTemplate.exchange(
-					"http://localhost:8080/user", 
+					baseApiUrl + "/user", 
 					HttpMethod.POST,
 					request,
 					Void.class);
+	}
+
+	public UserModel getUserByUsername(String username) {
+		
+		ResponseEntity<UserModel> response = restTemplate.exchange(
+				baseApiUrl + "/user/" + username,
+				HttpMethod.GET,
+				null,
+				UserModel.class
+				);
+		
+		return response.getBody();
 	}
 	
 }

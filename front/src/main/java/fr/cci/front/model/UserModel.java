@@ -3,16 +3,16 @@ package fr.cci.front.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class UserModel {
 	
 	private String username;
 	private String password;
 	private List<String> roles = new ArrayList<String>();
 
-	public User() {
+	public UserModel() {
 	}
 
-	public User(String username, String password) {
+	public UserModel(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;

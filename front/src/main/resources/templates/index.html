@@ -1,11 +1,10 @@
 <html>
 <body>
 
-Welcome <span th:text="${session.user.username}"/>
+Welcome <security:authentication property="principal.username" />
 <br/>
 <tr th:each="user: ${users}">
 	<td th:text="${user.username}" /></td>
-<!-- 	<td><a th:href="@{/delete/{username}(username=${user.username})}">Delete</a></td> -->
 </tr>
 
 </body>
