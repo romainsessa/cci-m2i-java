@@ -8,4 +8,6 @@ import fr.cci.api.entities.ERole;
 @Repository
 public interface ERoleRepository extends JpaRepository<ERole, Long>{
 
+	public ERole findByName(String name);
+	
 }

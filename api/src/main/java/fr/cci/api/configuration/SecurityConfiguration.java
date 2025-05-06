@@ -25,41 +25,35 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 public class SecurityConfiguration {
 
 	private String key = "YPFMI3eWfEIl400X1r7GMAG3BtpIg4nh";
-	
+
 	@Bean
 	public JwtEncoder jwtEncoder() {
-		return new NimbusJwtEncoder(
-				new ImmutableSecret<>(key.getBytes())
-				);				
+		return new NimbusJwtEncoder(new ImmutableSecret<>(key.getBytes()));
 	}
-	
+
 	@Bean
 	public JwtDecoder jwtDecoder() {
-		SecretKeySpec secretKey = new SecretKeySpec(
-				key.getBytes(), 0, key.getBytes().length, "RSA");
-		return NimbusJwtDecoder.withSecretKey(secretKey)
-				.macAlgorithm(MacAlgorithm.HS256).build();
+		SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), 0, key.getBytes().length, "RSA");
+		return NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS256).build();
 
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-		return http
-				.cors(Customizer.withDefaults())
-				.csrf(csrf -> csrf.disable())
-				.sessionManagement(session -> 
-					session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+		return http.cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers(HttpMethod.POST, "/user", "/login").permitAll()
-						.anyRequest().authenticated())
-				.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-				.build();
+						.requestMatchers("/h2-console/**").permitAll()
+					.anyRequest().authenticated())
+				.headers(header -> header.frameOptions(option -> option.disable()) )
+				.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())).build();
 	}
-	
+
 }

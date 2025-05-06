@@ -19,17 +19,16 @@ import fr.cci.api.service.UserService;
 public class UserController {
 
 	private UserService userService;
-	
+
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@GetMapping("/{username}")
-	public GetUserByUsernameResponseDTO getByUsername(
-			@PathVariable(value = "username") String username) {
+	public GetUserByUsernameResponseDTO getByUsername(@PathVariable(value = "username") String username) {
 		return userService.getByUsername(username);
 	}
-	
+
 	@GetMapping
 	public List<GetUserResponseDTO> get() {
 		return userService.get();

@@ -24,14 +24,14 @@ public class EUser {
 	private String username;
 
 	private String password;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<ERole> roles = new ArrayList<ERole>();
 
 	@ManyToOne
 	@JoinColumn(name = "idCatecory")
 	private ECategory category;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -55,23 +55,23 @@ public class EUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public List<ERole> getRoles() {
 		return roles;
 	}
-	
+
 	public void addRole(ERole role) {
 		this.roles.add(role);
 	}
-	
+
 	public void removeRole(ERole role) {
 		this.roles.remove(role);
 	}
-	
+
 	public ECategory getCategory() {
 		return category;
 	}
-	
+
 	public void setCategory(ECategory category) {
 		this.category = category;
 	}
