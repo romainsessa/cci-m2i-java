@@ -18,7 +18,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	@RolesAllowed("USER")
-	public ModelAndView home(HttpSession session) {
+	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("users", userService.get());
 		return mav;

@@ -8,4 +8,6 @@ import fr.cci.api.entities.EUser;
 @Repository
 public interface EUserRepository extends JpaRepository<EUser, Long>{
 	
+	public EUser findByUsername(String username);
+	
 }
