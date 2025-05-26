@@ -10,6 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import fr.cci.front.configuration.TokenContext;
 import fr.cci.front.model.UserModel;
 import fr.cci.front.service.UserService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -30,9 +31,13 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public RedirectView loginSubmit(@ModelAttribute UserModel user) {
+	public RedirectView loginSubmit(@ModelAttribute UserModel user, HttpSession httpSession) {
 		String token = userService.login(user);
 		tokenContext.setToken(token);
+		
+		UserModel connectedUser = userService.getUserInformation();
+		httpSession.setAttribute("user", connectedUser);
+		
 		return new RedirectView("/");
 	}
 	

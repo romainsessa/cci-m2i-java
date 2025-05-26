@@ -27,4 +27,8 @@ public class UserService {
 	public String login(UserModel user) {
 		return userProxy.login(user);
 	}
+	
+	public UserModel getUserInformation() {
+		return userProxy.getUserInformation();
+	}
 }

@@ -86,4 +86,20 @@ public class UserProxy {
 		return response.getBody();
 	}
 	
+	public UserModel getUserInformation() {
+		
+		HttpEntity request = new HttpEntity<>(
+				createTokenHeader(
+						tokenContext.getToken()));
+		
+		ResponseEntity<UserModel> response = restTemplate.exchange(
+				baseApiUrl + "/me",
+				HttpMethod.GET,
+				request,
+				UserModel.class
+				);
+		
+		return response.getBody();
+	}
+	
 }

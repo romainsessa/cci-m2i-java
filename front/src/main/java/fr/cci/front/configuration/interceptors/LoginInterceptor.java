@@ -1,8 +1,9 @@
-package fr.cci.front.configuration;
+package fr.cci.front.configuration.interceptors;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import fr.cci.front.configuration.TokenContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
