@@ -1,7 +1,7 @@
 <html>
 <body>
 
-Welcome <span sec:authentication="name"></span>
+Welcome
 <br/>
 <tr th:each="user: ${users}">
 	<td th:text="${user.username}" /></td>

@@ -23,4 +23,8 @@ public class UserService {
 	public void add(UserModel user) {
 		userProxy.add(user);
 	}
+
+	public String login(UserModel user) {
+		return userProxy.login(user);
+	}
 }

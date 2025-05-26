@@ -4,8 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import fr.cci.front.service.UserService;
-import jakarta.annotation.security.RolesAllowed;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -17,7 +15,6 @@ public class HomeController {
 	}
 
 	@GetMapping("/")
-	@RolesAllowed("USER")
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("users", userService.get());
@@ -25,7 +22,6 @@ public class HomeController {
 	}
 
 	@GetMapping("/admin")
-	@RolesAllowed("ADMIN")
 	public ModelAndView admin() {
 		return new ModelAndView("admin");
 	}
