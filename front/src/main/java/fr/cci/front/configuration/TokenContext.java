@@ -14,5 +14,5 @@ public class TokenContext {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
+
 }
