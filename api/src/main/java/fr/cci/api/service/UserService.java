@@ -9,12 +9,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.cci.api.entities.ECategory;
 import fr.cci.api.entities.ERole;
 import fr.cci.api.entities.EUser;
 import fr.cci.api.payload.requests.LoginDTO;
 import fr.cci.api.payload.requests.SaveUserDTO;
 import fr.cci.api.payload.responses.GetUserByUsernameResponseDTO;
 import fr.cci.api.payload.responses.GetUserResponseDTO;
+import fr.cci.api.repositories.ECategoryRepository;
 import fr.cci.api.repositories.ERoleRepository;
 import fr.cci.api.repositories.EUserRepository;
 
@@ -24,23 +26,27 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 	private EUserRepository eUserRepository;
 	private ERoleRepository eRoleRepository;
+	private ECategoryRepository eCategoryRepository;
 
 	public UserService(PasswordEncoder passwordEncoder, EUserRepository eUserRepository,
-			ERoleRepository eRoleRepository) {
+			ERoleRepository eRoleRepository, ECategoryRepository eCategoryRepository) {
 		this.passwordEncoder = passwordEncoder;
 		this.eUserRepository = eUserRepository;
 		this.eRoleRepository = eRoleRepository;
+		this.eCategoryRepository = eCategoryRepository;
 	}
 
 	public void save(SaveUserDTO user) {
 
 		ERole defaultRole = eRoleRepository.findByName("USER");
+		ECategory defaultCategory = eCategoryRepository.findById(Long.valueOf(1)).get();
 
 		EUser entityUser = new EUser();
 		entityUser.setUsername(user.getUsername());
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		entityUser.setPassword(encodedPassword);
 		entityUser.addRole(defaultRole);
+		entityUser.setCategory(defaultCategory);
 
 		eUserRepository.save(entityUser);
 	}
