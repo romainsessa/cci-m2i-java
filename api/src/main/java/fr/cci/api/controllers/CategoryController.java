@@ -8,7 +8,7 @@ import fr.cci.api.payload.responses.GetCategoryResponseDTO;
 import fr.cci.api.service.CategoryService;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 public class CategoryController {
 
 	private CategoryService categoryService;

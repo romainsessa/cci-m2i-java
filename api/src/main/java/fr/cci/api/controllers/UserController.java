@@ -15,7 +15,7 @@ import fr.cci.api.payload.responses.GetUserResponseDTO;
 import fr.cci.api.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
 	private UserService userService;
@@ -31,6 +31,7 @@ public class UserController {
 
 	@GetMapping
 	public List<GetUserResponseDTO> get() {
+		System.out.println("here");
 		return userService.get();
 	}
 

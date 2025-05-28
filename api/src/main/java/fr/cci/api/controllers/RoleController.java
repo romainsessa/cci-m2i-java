@@ -15,7 +15,7 @@ import fr.cci.api.repositories.ERoleRepository;
 import fr.cci.api.service.RoleService;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api/role")
 public class RoleController {
 
 	private RoleService apiRoleService;
