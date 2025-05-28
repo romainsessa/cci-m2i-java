@@ -49,8 +49,7 @@ public class SecurityConfiguration {
 		return http.cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers(HttpMethod.POST, "/user", "/login").permitAll()
-						.requestMatchers("/h2-console/**").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/user", "/api/login").permitAll()
 						.requestMatchers("/actuator/**").permitAll()
 					.anyRequest().authenticated())
 				.headers(header -> header.frameOptions(option -> option.disable()) )
