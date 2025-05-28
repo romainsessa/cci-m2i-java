@@ -17,7 +17,7 @@ import fr.cci.front.model.UserModel;
 public class UserProxy {
 	
 	private TokenContext tokenContext;
-	private final String baseApiUrl = "http://localhost:8080";
+	private final String baseApiUrl = "http://localhost:9001/api";
 	private RestTemplate restTemplate = new RestTemplate();
 
 	public UserProxy(final TokenContext tokenContext) {
