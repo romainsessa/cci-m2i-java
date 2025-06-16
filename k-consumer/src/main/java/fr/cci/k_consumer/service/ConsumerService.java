@@ -5,7 +5,7 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
-import fr.cci.k_consumer.dtos.EventDTO;
+import fr.cci.common.EventDTO;
 
 @Service
 public class ConsumerService {

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.cci.k_producer.dtos.EventDTO;
+import fr.cci.common.EventDTO;
 import fr.cci.k_producer.dtos.MessageDTO;
 
 @RestController

@@ -1,4 +1,4 @@
-package fr.cci.k_producer.dtos;
+package fr.cci.common;
 
 public class EventDTO {
 
@@ -19,6 +19,10 @@ public class EventDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public EventDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public EventDTO(String name, String password) {
